@@ -1,0 +1,17 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h1>Mensajes recibidos</h1>
+{% for message in received_messages %}
+    <p>{{ message.sender.username }}: {{ message.content }}</p>
+{% empty %}
+    <p>No tienes mensajes recibidos.</p>
+{% endfor %}
+
+<h1>Mensajes enviados</h1>
+{% for message in sent_messages %}
+    <p>{{ message.receiver.username }}: {{ message.content }}</p>
+{% empty %}
+    <p>No has enviado mensajes.</p>
+{% endfor %}
+{% endblock %}

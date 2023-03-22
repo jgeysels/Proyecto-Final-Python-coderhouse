@@ -1,0 +1,9 @@
+{% if request.user.is_superuser %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+{% else %}
+    <p>No tienes permiso para realizar esta acción.</p>
+{% endif %}

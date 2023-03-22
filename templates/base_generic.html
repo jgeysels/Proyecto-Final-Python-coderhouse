@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Blog de Cocina</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'about' %}">Acerca de mí</a>
+        <a href="{% url 'pages' %}">Blogs</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'messages' %}">Mensajes</a>
+        {% endif %}
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+            <a href="{% url 'profile' %}">Perfil</a>
+        {% else %}
+            <a href="{% url 'signup' %}">Registrarse</a>
+            <a href="{% url 'login' %}">Iniciar sesión</a>
+        {% endif %}
+    </nav>
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
+

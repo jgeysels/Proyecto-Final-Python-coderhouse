@@ -1,0 +1,8 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h2>Perfil de {{ user.username }}</h2>
+<p>Email: {{ user.email }}</p>
+<p>Nombre de usuario: {{ user.username }}</p>
+<a href="{% url 'profile_update' %}">Editar perfil</a>
+{% endblock %}
