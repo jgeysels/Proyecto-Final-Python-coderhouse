@@ -1,29 +1,71 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
+    {% load static %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
     <title>Mi Blog de Cocina</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
 </head>
-<body>
-    <nav>
-        <a href="{% url 'index' %}">Home</a>
-        <a href="{% url 'about' %}">Acerca de mí</a>
-        <a href="{% url 'pages' %}">Blogs</a>
-        {% if user.is_authenticated %}
-            <a href="{% url 'messages' %}">Mensajes</a>
-        {% endif %}
-        {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}">Cerrar sesión</a>
-            <a href="{% url 'profile' %}">Perfil</a>
-        {% else %}
-            <a href="{% url 'signup' %}">Registrarse</a>
-            <a href="{% url 'login' %}">Iniciar sesión</a>
-        {% endif %}
-    </nav>
-    <div>
+<body class="d-flex flex-column h-100">
+    <main class="flex-shrink-0">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-5">
+                <a class="navbar-brand" href="{% url 'index' %}">Mi Blog de Cocina</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">Acerca de mí</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'pages' %}">Blogs</a></li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'messages' %}">Mensajes</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Perfil</a></li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Registrarse</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
         {% block content %}
-        {% endblock %}
-    </div>
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-5">
+                <div class="row gx-5 align-items-center justify-content-center">
+                    <div class="col-lg-8 col-xl-7 col-xxl-6">
+                        <div class="my-5 text-center text-xl-start">
+                            <h1 class="display-5 fw-bolder text-white mb-2">Bienvenido a mi Blog de Cocina</h1>
+                            <p class="lead fw-normal text-white-50 mb-4">Explora nuestras deliciosas recetas y consejos de cocina.</p>
+                            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center
+                            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
+                                {% if not user.is_authenticated %}
+                                    <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'signup' %}">Registrarse</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="{% static 'assets/blog.jpg' %}" alt="..." /></div>
+                </div>
+            </div>
+        </header>
+        <div class="container mt-4">
+            {% endblock %}
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 
