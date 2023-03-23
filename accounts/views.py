@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Message, Profile
 from .forms import MessageForm, ProfileUpdateForm
 from django.contrib.auth.models import User
+from django.contrib import messages as django_messages
+
 
 def signup(request):
     if request.method == 'POST':
@@ -80,6 +82,7 @@ def send_message(request):
         form = MessageForm()
     return render(request, 'accounts/send_message.html', {'form': form})
 
+
 @login_required
 def profile_update(request):
     if request.method == 'POST':
@@ -89,7 +92,12 @@ def profile_update(request):
             request.user.email = updated_email
             request.user.save()
             form.save()
+            django_messages.success(request, 'Perfil actualizado correctamente')
             return redirect('profile')
+        else:
+            django_messages.error(request, 'Hubo un error al actualizar el perfil')
     else:
         form = ProfileUpdateForm(instance=request.user.profile)
     return render(request, 'accounts/profile_update.html', {'form': form})
+
+
