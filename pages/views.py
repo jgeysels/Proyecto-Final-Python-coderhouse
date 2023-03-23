@@ -35,10 +35,11 @@ def create_blog(request):
 
 @login_required
 def update_blog(request, blog_id):
-    if request.user != blog.author and not request.user.is_superuser:
-        raise PermissionDenied    
-
     blog = get_object_or_404(Blog, pk=blog_id)
+    
+    if request.user != blog.author and not request.user.is_superuser:
+        raise PermissionDenied
+
     if request.method == 'POST':
         form = BlogForm(request.POST, request.FILES, instance=blog)
         if form.is_valid():
@@ -48,11 +49,13 @@ def update_blog(request, blog_id):
         form = BlogForm(instance=blog)
     return render(request, 'pages/update_blog.html', {'form': form, 'blog': blog})
 
+
 @login_required
 def delete_blog(request, blog_id):
+    blog = get_object_or_404(Blog, pk=blog_id)
+    
     if request.user != blog.author and not request.user.is_superuser:
         raise PermissionDenied
 
-    blog = get_object_or_404(Blog, pk=blog_id)
     blog.delete()
     return redirect('pages')

@@ -1,9 +1,35 @@
-{% if request.user.is_superuser %}
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar</button>
-    </form>
-{% else %}
-    <p>No tienes permiso para realizar esta acción.</p>
-{% endif %}
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class="container px-5 my-5">
+    <div class="row gx-5">
+        <div class="col-lg-9">
+            <h2>Editar blog</h2>
+            {% if request.user.is_authenticated %}
+                <form method="post" enctype="multipart/form-data" class="mt-4">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="{{ form.title.id_for_label }}" class="form-label">Título</label>
+                        {{ form.title }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.subtitle.id_for_label }}" class="form-label">Subtítulo</label>
+                        {{ form.subtitle }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.body.id_for_label }}" class="form-label">Cuerpo</label>
+                        {{ form.body }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.image.id_for_label }}" class="form-label">Imagen</label>
+                        {{ form.image }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            {% else %}
+                <p>No tienes permiso para realizar esta acción.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

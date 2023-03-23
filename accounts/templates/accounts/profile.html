@@ -1,8 +1,33 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
-<h2>Perfil de {{ user.username }}</h2>
-<p>Email: {{ user.email }}</p>
-<p>Nombre de usuario: {{ user.username }}</p>
-<a href="{% url 'profile_update' %}">Editar perfil</a>
+    <main class="flex-shrink-0">
+        <section class="py-5">
+            <div class="container px-5">
+                <!-- Profile -->
+                <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
+                    <div class="text-center mb-5">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-person-circle"></i></div>
+                        <h1 class="fw-bolder">Perfil de {{ user.username }}</h1>
+                        <p class="lead fw-normal text-muted mb-0">Información de tu cuenta</p>
+                    </div>
+                    <div class="row gx-5 justify-content-center">
+                        <div class="col-lg-8 col-xl-6">
+                            <div class="mb-3">
+                                <h3 class="h6">Email</h3>
+                                <p>{{ user.email }}</p>
+                            </div>
+                            <div class="mb-3">
+                                <h3 class="h6">Nombre de usuario</h3>
+                                <p>{{ user.username }}</p>
+                            </div>
+                            <div class="d-grid">
+                                <a class="btn btn-primary btn-lg" href="{% url 'profile_update' %}">Editar perfil</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 {% endblock %}

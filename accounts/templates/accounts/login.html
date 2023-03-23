@@ -1,10 +1,40 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
-<h2>Iniciar sesión</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Iniciar sesión</button>
-</form>
+    <main class="flex-shrink-0">
+        <section class="py-5">
+            <div class="container px-5">
+                <!-- Login form-->
+                <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
+                    <div class="text-center mb-5">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-person-fill"></i></div>
+                        <h1 class="fw-bolder">Iniciar sesión</h1>
+                        <p class="lead fw-normal text-muted mb-0">Introduce tus credenciales para iniciar sesión</p>
+                    </div>
+                    <div class="row gx-5 justify-content-center">
+                        <div class="col-lg-8 col-xl-6">
+                            <form method="post">
+                                {% csrf_token %}
+                                <!-- Username input -->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="username" type="text" name="{{ form.username.name }}" placeholder="{{ form.username.label }}" value="{{ form.username.value|default:'' }}" required />
+                                    <label for="username">{{ form.username.label }}</label>
+                                </div>
+                                <!-- Password input -->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="password" type="password" name="{{ form.password.name }}" placeholder="{{ form.password.label }}" value="{{ form.password.value|default:'' }}" required />
+                                    <label for="password">{{ form.password.label }}</label>
+                                </div>
+                                <!-- Submit Button -->
+                                <div class="d-grid">
+                                    <button class="btn btn-primary btn-lg" type="submit">Iniciar sesión</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 {% endblock %}
+

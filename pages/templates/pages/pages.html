@@ -1,16 +1,65 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
-<h1>Lista de blogs</h1>
+<style>
+    .blog-image {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 200px;
+        width: 50%;
+    }
+    .image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+    }
+</style>
+
+<h1 class="fw-bolder fs-5 mb-4">Lista de blogs</h1>
 {% for blog in blogs %}
-    <h2>{{ blog.title }}</h2>
-    <p>{{ blog.subtitle }}</p>
-    <p><a href="{% url 'page_detail' blog.id %}">Leer más</a></p>
+    <div class="card border-0 shadow rounded-3 overflow-hidden mb-4">
+        <div class="card-body p-0">
+            <div class="row gx-0">
+                <div class="col-lg-6 col-xl-5 py-lg-5">
+                    <div class="p-4 p-md-5">
+                        <div class="h2 fw-bolder">{{ blog.title }}</div>
+                        <p>{{ blog.subtitle }}</p>
+                        <a class="stretched-link text-decoration-none" href="{% url 'page_detail' blog.id %}">
+                            Leer más
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xl-7">
+                    <div class="image-container">
+                        <div class="blog-image" style="background-image: url('{{ blog.image.url }}')"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% empty %}
     <p>No hay páginas aún.</p>
 {% endfor %}
 {% if user.is_authenticated %}
-    <a href="{% url 'create_blog' %}">Crear blog</a>
+    <a href="{% url 'create_blog' %}" class="btn btn-primary">Crear blog</a>
 {% endif %}
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

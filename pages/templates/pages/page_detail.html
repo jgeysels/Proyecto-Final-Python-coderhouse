@@ -1,16 +1,52 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
-<h1>{{ blog.title }}</h1>
-<p>{{ blog.subtitle }}</p>
-<p>{{ blog.body }}</p>
-<p>Autor: {{ blog.author }}</p>
-<p>Fecha: {{ blog.date }}</p>
-<img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+<style>
+    .post-header .post-badges a {
+        margin-right: 5px;
+    }
+</style>
 
-{% if user == blog.author or user.is_superuser %}
-    <a href="{% url 'update_blog' blog.id %}">Editar blog</a>
-    <a href="{% url 'delete_blog' blog.id %}">Eliminar blog</a>
-{% endif %}
+<div class="container px-5 my-5">
+    <div class="row gx-5">
+        <div class="col-lg-3">
+            <div class="d-flex align-items-center mt-lg-5 mb-4">
+                <img class="img-fluid rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="{{ blog.author }}" />
+                <div class="ms-3">
+                    <div class="fw-bold">{{ blog.author }}</div>
+                    <div class="text-muted">Autor del blog</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <!-- Post content-->
+            <article>
+                <!-- Post header-->
+                <header class="mb-4 post-header">
+                    <!-- Post title-->
+                    <h1 class="fw-bolder mb-1">{{ blog.title }}</h1>
+                    <!-- Post meta content-->
+                    <div class="text-muted fst-italic mb-2">{{ blog.date }}</div>
+                    <!-- Post categories-->
+                    <div class="post-badges">
+                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{ blog.subtitle }}</a>
+                    </div>
+                </header>
+                <!-- Preview image figure-->
+                <figure class="mb-4"><img class="img-fluid rounded" src="{{ blog.image.url }}" alt="{{ blog.title }}" /></figure>
+                <!-- Post content-->
+                <section class="mb-5">
+                    <p class="fs-5 mb-4">{{ blog.body }}</p>
+                </section>
+            </article>
+
+            {% if user == blog.author or user.is_superuser %}
+                <a href="{% url 'update_blog' blog.id %}" class="btn btn-primary">Editar blog</a>
+                <a href="{% url 'delete_blog' blog.id %}" class="btn btn-danger">Eliminar blog</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}
+
 
